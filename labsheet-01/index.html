@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Labsheet 01</title>
+</head>
+<body>
+<script>
+
+    // Step 01
+    var fun1 = function() {
+
+        return function() {
+            // Method 1 :
+            // console.log("Hello World");
+
+            // Method 2 :
+            return "Hello World";
+        }
+    }
+
+    function fun2(msg) {
+        // Method 1 :
+        // var exe = msg();
+        // exe();
+
+        // Method 2 :
+        var execute = msg();
+        console.log(execute());
+    }
+
+    fun2(fun1);
+
+    // Step 02
+    var student = {
+        name: "Krishna",
+        age: 12,
+        printDetails: function() {
+            // simple print using a comma ','
+            // leaves a space between two attributes
+            console.log(this.name, this.age);
+
+            // simple print using a concatenation symbol '+'
+            // leaves no space between two attributes
+            console.log(this.name + this.age);
+
+            //printing using shift and symbol tilda and new line
+            console.log("Name: " + `${this.name}` + "\nAge: " + `${this.age}`);
+
+            //printing using a new line
+            console.log("Name: " + this.name + "\nAge: " + this.age);
+        },
+        printAge: function() {
+            //simple print
+            console.log("Age: " + this.age);
+
+            //printing using shift and symbol tilda
+            console.log("Age: " + `${this.age}`);
+        }
+    }
+
+    student.printDetails();
+    console.log("Calling printAge() : ");
+    student.printAge();
+
+    // Step 03
+    // Step 3a
+    var vehicleName = "Audi";
+
+    // Step 3b
+    function printVehicleName() {
+        //using this keyword
+        console.log(this.vehicleName);
+    }
+
+    // Step 3c
+    var Vehicle = {
+        vehicleName: "Honda City",
+        getVehicleName: printVehicleName,
+        // Step 3e modifying getVehicleName by
+        // defining another method
+        getVehicleName2: function() {
+            return function() {
+                console.log(this.vehicleName);
+            }
+        }
+    }
+
+    // Step 3d
+    printVehicleName();
+    // calling with no return function and only console command
+    // prints the 'vehicleName' defined inside the Vehicle Object
+    Vehicle.getVehicleName();
+
+    // EXTRA KNOWLEDGE TO KNOW!!! :
+    // using the getVehicleName2() with return function and calling
+    // that method as Vehicle.getVehicleName2() will print the globally
+    // defined 'vehicleName' and not the one defined inside .
+    var exec = Vehicle.getVehicleName2();
+    exec();
+
+    // So we need to use the bind() method to bind the vehicleName
+    // variable defined inside the Vehicle object and not the
+    // globally defined variable.
+    var exe1 = Vehicle.getVehicleName2();
+    exe1 = exe1.bind(Vehicle);
+    exe1();
+
+    // Step 3e
+    var globalVehicleName = Vehicle.getVehicleName2();
+    globalVehicleName();
+
+    // Step 04
+    function calculateTax(taxPercentage) {
+        return function(amount) {
+            var taxAmount = taxPercentage * amount;
+            return (amount + taxAmount);
+        }
+    }
+
+    var finalAmount = calculateTax(0.12);
+    console.log(finalAmount(1000));
+
+
+    // Step 05
+    // Link to learn about FetchAPI is given below:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+    // Fetch API :
+    //The Fetch API provides a JavaScript interface for
+    // accessing and manipulating parts of the HTTP pipeline,
+    // such as requests and responses. It also provides a
+    // global fetch() method that provides an easy, logical
+    // way to fetch resources asynchronously across the network.
+
+    // Basic fetch request
+    fetch('http://example.com/movies.json')
+        .then(response => response.json())
+        .then(data => console.log(data));
+
+
+    // Uploading JSON Data :
+    const data = { username: 'example' };
+
+    fetch('https://example.com/profile', {
+        method: 'POST', // or 'PUT'
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+</script>
+
+</body>
+</html>
