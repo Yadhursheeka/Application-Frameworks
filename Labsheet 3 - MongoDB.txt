@@ -1,0 +1,24 @@
+3) i) use sliit
+   ii) db.SLIIT3.insertOne({"name": "John", "dateOfBirth": "1990-01-01T00:00:00z", "subjects": ["Application frameworks", "Computer Architecture"]})
+
+4) db.SLIIT3.findOne({"name": "John"})
+
+5) db.SLIIT3.findOne({_id: ObjectId("60aca486dfbc8a0720c7bcf7")})
+
+6) db.SLIIT3.updateOne({"name": "John"}, {$addToSet: {"subjects": "Distributed Computing"}})
+   
+   ---- Updating name ----
+   db.SLIIT3.updateOne({"name": "John"}, {$set: {"name": "Jack"}})
+
+7) db.SLIIT3.insertMany([ {"name": "Smith", "dateOfBirth": "1990-01-15T00:00:00z", "subjects": ["Application Frameworks", "Computer Architecture"], "isActive": true}, { "name": "Jane", "dateOfBirth": "1990-02-15T00:00:00z", "subjects": ["Application frameworks", "Computer Architecture"], "isActive": false}])
+   --- with ordered attribute ---
+   db.SLIIT3.insertMany([ {"name": "Smith", "dateOfBirth": "1990-01-15T00:00:00z", "subjects": ["Application frameworks", "Computer Architecture"], "isActive": true}, { "name": "Jane", "dateOfBirth": "1990-02-15T00:00:00z","subjects": ["Application frameworks", "Computer Architecture"], "isActive": false}], {"ordered": true})
+
+--- Deleting 2 documents in the same collection : ---
+	db.SLIIT3.deleteMany({"name": "Smith"}, {"name": "Jane"})
+
+8) db.SLIIT3.updateOne({"name": "Smith", "isActive": true}, {$addToSet: {"subjects": "Distributed Computing"}})
+
+9) db.SLIIT3.updateOne({"name": "Smith", "isActive": true}, {$set: {"isActive": false}})
+
+10) db.SLIIT3.deleteOne({"name": "Smith"})
