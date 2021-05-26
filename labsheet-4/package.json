@@ -1,0 +1,11 @@
+{
+  "name": "labsheet-4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Yadhursheeka",
+  "license": "ISC"
+}
